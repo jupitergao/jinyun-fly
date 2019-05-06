@@ -1,9 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import {render} from 'react-dom';
+import {Provider} from 'react-redux';
+import ons from 'onsenui';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import 'onsenui/css/onsenui.css';
+import 'onsenui/css/onsen-css-components.css';
 
-serviceWorker.unregister();
+import store from './store.js';
+import {view as Main} from './main'
+
+ons.enableAutoStatusBarFill();
+ons.disableAutoStyling();
+ons.ready(() => {
+    if (ons.platform.isIPhoneX()) {
+        document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
+        document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
+    }
+    render(
+        <Provider store={store}>
+            <Main />
+        </Provider>,
+        document.getElementById('root')
+    )
+});
