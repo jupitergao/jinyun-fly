@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/release/platforms
+/release/node_modules
+/release/plugins
+/release/www
