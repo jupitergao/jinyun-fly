@@ -1,0 +1,15 @@
+.activeCategory {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    padding: 6px 0;
+    color: #0289ff;
+}
+.inactiveCategory {
+    width: 64px;
+    text-align: center;
+    font-size: 16px;
+    padding: 7px 0;
+    color: #1f1f21;
+    display: inline-block;
+}

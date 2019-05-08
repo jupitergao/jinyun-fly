@@ -1,5 +1,6 @@
-import {LOAD_CATEGORY} from './actionTypes.js';
+import {CHANGE_TAB} from './actionTypes.js';
 
-export const loadCategory = () => ({
-    type: LOAD_CATEGORY
+export const changeTab = (index) => ({
+    type: CHANGE_TAB,
+    index: index
 });

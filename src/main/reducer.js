@@ -1,18 +1,16 @@
-import {LOAD_CATEGORY} from './actionTypes.js';
+import {CHANGE_TAB} from './actionTypes.js';
 
-export default (state = [], action) => {
+const initState = {
+    tabindex: 0
+}
+
+export default (state = initState, action) => {
     switch(action.type) {
-      case LOAD_CATEGORY: {
-        return [
-          {
-            categories: ['头条','推荐']
-          },
-          ...state
-        ]
+      case CHANGE_TAB: {
+        return {...state, tabindex: action.index};
       }
-      
       default: {
         return state;
       }
     }
-  }
+}

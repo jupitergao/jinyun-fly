@@ -1,37 +1,35 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
+import {mapState, mapDispatch} from './container'
 
 import * as Ons from 'react-onsenui';
+
+import {view as HomePage} from '../../home';
 
 import 'onsenui/css/onsenui.css';
 import 'onsenui/css/onsen-css-components.css';
 
 class MainTabs extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.renderHeader = this.renderHeader.bind(this);
         this.renderTabs = this.renderTabs.bind(this);
-        this.state = {
-            index: 0
-        };
+
     }
     renderHeader(){
         const titles = ['首页', '视频', '融媒', '云上'];
+        console.log(this.props.tabindex);
         return (
         <Ons.Toolbar>
-            <div className='center'>{titles[this.state.index]}</div>
+            <div className='center'>{titles[this.props.tabindex]}</div>
         </Ons.Toolbar>
         ); 
     }
     renderTabs(){
         return [
             {
-                content: <Ons.Page key='homePage'>
-                <section style={{margin: '16px'}}>
-                    <p>
-                    home.
-                    </p>
-                </section>
-                </Ons.Page>,
+                content: <HomePage key='homePage'/>,
                 tab: <Ons.Tab label='首页' icon='fa-home' key='home' />
             },
             {
@@ -70,12 +68,14 @@ class MainTabs extends React.Component {
         return (
             <Ons.Page renderToolbar={this.renderHeader}>
             <Ons.Tabbar
-              swipeable={true}
+              swipeable={false}
               position='bottom'
-              index={this.state.index}
-              onPreChange={ (event) => {
-                  if (event.index !== this.state.index) {
-                    this.setState({index: event.index});
+              index={this.props.tabindex}
+              onPostChange={ (event) => {
+                  console.log("onPostChange tab");
+                  console.log(event);
+                  if (event.index !== this.props.tabindex) {
+                    this.props.onPreChange(event.index);
                   }
               } }
               renderTabs={this.renderTabs}
@@ -85,4 +85,4 @@ class MainTabs extends React.Component {
     }
 }
 
-export default MainTabs;
+export default connect(mapState,mapDispatch)(MainTabs);
